@@ -1,1 +1,0 @@
-insert into lists (name, list, active) VALUES ('PPT', 'DOC_TYPE', TRUE);
