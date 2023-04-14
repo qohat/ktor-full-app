@@ -1,0 +1,2 @@
+ALTER TABLE companies ADD COLUMN women INT;
+ALTER TABLE companies ADD COLUMN men INT;

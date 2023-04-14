@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  fiduciaria:
+    image: "fidu-app"
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/fiduagraria_db?currentSchema=fiduciaria
+    ports:
+      - "8080:8080"
+  postgres:
+    image: postgres:13.0-alpine
+    hostname: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: haskell
+      POSTGRES_DB: fiduagraria_db

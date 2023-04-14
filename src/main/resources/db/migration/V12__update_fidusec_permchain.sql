@@ -1,0 +1,1 @@
+update users set permission_chain = 'RdAllNPaid:RdPaid:RdCompleted:RdRpts:ExptRpts:ImptRpts' where role_id = 4;

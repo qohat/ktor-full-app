@@ -1,0 +1,2 @@
+update lists set name = 'Actividad Sector Pecuario' where name = 'Sector Pecuario' and list = 'ACTIVITY';
+update lists set name = 'Actividad Sector Agrícola' where name = 'Sector Agrícola' and list = 'ACTIVITY';
