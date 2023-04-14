@@ -2,7 +2,6 @@ package com.qohat.domain
 
 import arrow.core.Either
 import com.qohat.codec.Codecs
-import com.qohat.domain.requests.BillReturnId
 import kotlinx.serialization.Serializable
 import java.util.UUID
 

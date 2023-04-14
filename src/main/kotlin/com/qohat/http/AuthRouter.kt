@@ -1,18 +1,17 @@
 package com.qohat.http
 
-import arrow.core.Either
 import arrow.core.continuations.either
-import com.qohat.domain.PermissionCode
 import com.qohat.domain.UserAttempt
 import com.qohat.features.AuthUser
-import com.qohat.features.withPermission
 import com.qohat.services.AuthService
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.http.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.call
+import io.ktor.server.auth.authenticate
+import io.ktor.server.auth.principal
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.post
+import io.ktor.server.routing.route
 
 fun Route.authRouting(authService: AuthService) {
     route("/auth") {

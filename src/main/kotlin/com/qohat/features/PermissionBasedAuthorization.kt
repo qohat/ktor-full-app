@@ -2,18 +2,21 @@ package com.qohat.features
 
 import com.qohat.domain.PermissionCode
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.*
-import io.ktor.server.application.ApplicationCallPipeline.ApplicationPhase.Plugins
-import io.ktor.server.auth.*
-import io.ktor.server.request.*
+import io.ktor.server.application.createRouteScopedPlugin
+import io.ktor.server.application.install
+import io.ktor.server.auth.AuthenticationChecked
+import io.ktor.server.auth.Principal
+import io.ktor.server.auth.principal
+import io.ktor.server.request.path
 import io.ktor.server.response.respond
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.*
-import io.ktor.util.*
-import io.ktor.util.pipeline.*
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.RouteSelector
+import io.ktor.server.routing.RouteSelectorEvaluation
+import io.ktor.server.routing.RoutingResolveContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.util.*
+import java.util.Date
+import java.util.UUID
 
 typealias Permission = PermissionCode
 

@@ -5,20 +5,15 @@ import arrow.core.continuations.ensureNotNull
 import com.qohat.domain.CreatedById
 import com.qohat.domain.NewPeople
 import com.qohat.domain.NewPeopleId
-import com.qohat.domain.PeopleId
 import com.qohat.domain.PermissionCode
 import com.qohat.domain.UserId
 import com.qohat.error.PeopleAlreadyExist
 import com.qohat.error.PeopleNotFoundError
 import com.qohat.features.withPermission
 import com.qohat.repo.PeopleRepo
-import com.qohat.services.PeopleService
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
-import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
-import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.put
@@ -26,7 +21,7 @@ import io.ktor.server.routing.route
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-fun Route.peopleRouting(peopleRepo: PeopleRepo, peopleService: PeopleService) {
+fun Route.peopleRouting(peopleRepo: PeopleRepo) {
     val logger: Logger = LoggerFactory.getLogger("PeopleRouting")
     authenticate {
         route("/people") {
@@ -87,18 +82,6 @@ fun Route.peopleRouting(peopleRepo: PeopleRepo, peopleService: PeopleService) {
                             peopleRepo.update(id, newPeople).bind()
                         }, HttpStatusCode.Accepted
                     )
-                }
-            }
-            withPermission(PermissionCode.DltP) {
-                delete("{id}") {
-                    val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
-                    if (peopleService.delete(PeopleId(id)))
-                        call.respond(status = HttpStatusCode.Accepted, "Person removed correctly")
-                    else
-                        call.respond(
-                            status = HttpStatusCode.NotFound,
-                            "Unable to delete because there is no people with id $id"
-                        )
                 }
             }
         }

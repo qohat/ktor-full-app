@@ -1,8 +1,6 @@
 package com.qohat.domain
 
-import com.qohat.codec.Codecs
 import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
 
 @JvmInline
 @Serializable
@@ -36,31 +34,3 @@ data class AttachmentsValidationEventShow(
 data class AttachmentsValidationEvents(
     val value: List<AttachmentsValidationEvent>
 )
-
-
-@Serializable
-data class ValidationCompaniesAttachmentsEvent(
-    val companyAttachment: CompanyAttachment,
-    val userId: String,
-    val userName: String,
-    val observation: String,
-    val state: AttachmentState,
-    val reason: ValueList,
-    @Serializable(Codecs.LocalDateTimeSerializer::class)
-    val createdAt: LocalDateTime
-)
-
-@Serializable
-data class ValidationPeopleAttachmentsEvent(
-    val peopleAttachment: PeopleAttachment,
-    val userId: String,
-    val userName: String,
-    val observation: String,
-    val state: AttachmentState,
-    val reason: ValueList,
-    @Serializable(Codecs.LocalDateTimeSerializer::class)
-    val createdAt: LocalDateTime
-)
-
-@Serializable
-data class EventId(val value: String)

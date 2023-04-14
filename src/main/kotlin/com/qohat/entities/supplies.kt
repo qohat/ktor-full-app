@@ -17,7 +17,6 @@ import org.jetbrains.exposed.sql.orWhere
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.stringLiteral
-import org.jetbrains.exposed.sql.substring
 import org.jetbrains.exposed.sql.update
 import java.time.LocalDateTime
 

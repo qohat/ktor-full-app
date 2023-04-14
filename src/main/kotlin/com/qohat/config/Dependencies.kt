@@ -7,18 +7,12 @@ import com.qohat.infra.S3Client
 import com.qohat.infra.S3ClientI
 import com.qohat.infra.SESClient
 import com.qohat.postgres.postgres
-import com.qohat.repo.AssignmentRepo
-import com.qohat.repo.CompaniesValidationEventRepo
 import com.qohat.repo.ConfigRepo
 import com.qohat.repo.DefaultAssignmentRepo
-import com.qohat.repo.DefaultCompanyFileRepo
-import com.qohat.repo.DefaultCompanyRepo
 import com.qohat.repo.DefaultConfigRepo
 import com.qohat.repo.DefaultEventRepoV2
 import com.qohat.repo.DefaultListRepo
 import com.qohat.repo.DefaultPaymentRepo
-import com.qohat.repo.DefaultPeopleCompanyRepo
-import com.qohat.repo.DefaultPeopleFileRepo
 import com.qohat.repo.DefaultPeopleRepo
 import com.qohat.repo.DefaultPeopleRequestRepo
 import com.qohat.repo.DefaultProductRepo
@@ -32,7 +26,6 @@ import com.qohat.repo.ListRepo
 import com.qohat.repo.PaymentRepo
 import com.qohat.repo.PeopleRepo
 import com.qohat.repo.PeopleRequestRepo
-import com.qohat.repo.PeopleValidationEventRepo
 import com.qohat.repo.ProductRepo
 import com.qohat.repo.RoleRepo
 import com.qohat.repo.StorageRepo
@@ -41,39 +34,18 @@ import com.qohat.repo.UserRepo
 import com.qohat.repo.ViewsRepo
 import com.qohat.services.AssignmentService
 import com.qohat.services.AuthService
-import com.qohat.services.CompanyService
-import com.qohat.services.CompanyValidationEventsService
 import com.qohat.services.DefaultAssignmentService
 import com.qohat.services.DefaultAuthService
-import com.qohat.services.DefaultCompanyService
 import com.qohat.services.DefaultListService
-import com.qohat.services.DefaultPaymentService
-import com.qohat.services.DefaultPeopleCompanyService
-import com.qohat.services.DefaultPeopleService
-import com.qohat.services.DefaultUserService
 import com.qohat.services.ListService
-import com.qohat.services.PaymentService
-import com.qohat.services.PeopleCompanyService
-import com.qohat.services.PeopleService
-import com.qohat.services.PeopleValidationEventsService
-import com.qohat.services.UserService
-import com.qohat.services.ValuesService
 
 data class Dependencies(
     val appConfig: AppConfig,
     val authService: AuthService,
-    val userService: UserService,
     val userRepo: UserRepo,
-    val companyService: CompanyService,
-    val peopleService: PeopleService,
     val peopleRepo: PeopleRepo,
-    val peopleCompanyService: PeopleCompanyService,
-    val companyValidationEventsService: CompanyValidationEventsService,
-    val peopleValidationEventsService: PeopleValidationEventsService,
     val listService: ListService,
-    val paymentService: PaymentService,
     val assignmentService: AssignmentService,
-    val valuesService: ValuesService,
     val roleRepo: RoleRepo,
     val peopleRequestRepo: PeopleRequestRepo,
     val s3Client: S3ClientI,
@@ -94,23 +66,10 @@ fun dependencies(appConfig: AppConfig): Resource<Dependencies> = resource {
     val userRepo = DefaultUserRepo(postgres)
     val listRepo = DefaultListRepo(postgres)
     val authService = DefaultAuthService(appConfig.jwtConfig, userRepo)
-    val userService = DefaultUserService(userRepo)
     val s3Client = S3Client(appConfig.s3Config, appConfig.filesConfig)
-    val companyService = DefaultCompanyService(appConfig.filesConfig, DefaultCompanyRepo(), DefaultCompanyFileRepo(), s3Client)
     val peopleRepo = DefaultPeopleRepo(postgres)
-    val peopleService = DefaultPeopleService(peopleRepo)
-    val peopleCompanyService = DefaultPeopleCompanyService(appConfig.filesConfig,
-        DefaultPeopleFileRepo(), DefaultPeopleCompanyRepo(postgres), s3Client)
-    val companyValidationEventsService = CompanyValidationEventsService(CompaniesValidationEventRepo(), DefaultCompanyFileRepo())
-    val peopleValidationEventsService = PeopleValidationEventsService(PeopleValidationEventRepo(), DefaultPeopleFileRepo())
     val listService = DefaultListService(listRepo)
-    val valueService = ValuesService
     val paymentRepo = DefaultPaymentRepo(postgres)
-    val paymentService = DefaultPaymentService(
-        paymentRepo, DefaultPeopleCompanyRepo(postgres), valueService, appConfig.businessParams, DefaultListService(
-            listRepo
-        )
-    )
     val assignmentRepo = DefaultAssignmentRepo(postgres)
     val assignmentService = DefaultAssignmentService(assignmentRepo, userRepo)
     val roleRepo = DefaultRoleRepo(postgres)
@@ -124,10 +83,8 @@ fun dependencies(appConfig: AppConfig): Resource<Dependencies> = resource {
     val viewsRepo = DefaultViewsRepo(postgres)
     val sesClient = EmailClient(appConfig.smtpConfig)
     Dependencies(
-        appConfig, authService, userService, userRepo, companyService, peopleService,
-        peopleRepo, peopleCompanyService, companyValidationEventsService, peopleValidationEventsService,
-        listService, paymentService, assignmentService, valueService, roleRepo, peopleRequestRepo, s3Client,
-        filesConfig, productRepo, supplieRepo, storageRepo, configRepo, eventRepoV2, viewsRepo, paymentRepo,
+        appConfig, authService, userRepo, peopleRepo, listService, assignmentService, roleRepo, peopleRequestRepo,
+        s3Client, filesConfig, productRepo, supplieRepo, storageRepo, configRepo, eventRepoV2, viewsRepo, paymentRepo,
         sesClient, listRepo
     )
 }

@@ -11,11 +11,15 @@ import com.qohat.domain.OrganizationBelongingInfo
 import com.qohat.domain.PeopleRequestNumber
 import com.qohat.domain.ProductId
 import com.qohat.domain.UserId
+import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.JoinType
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SortOrder
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.andWhere
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.javatime.date
 import org.jetbrains.exposed.sql.javatime.datetime
@@ -26,11 +30,6 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
 import java.time.LocalDateTime
 import java.util.UUID
-import kotlinx.serialization.Serializable
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.max
 
 object People: Table("people") {
     val id = uuid("id")

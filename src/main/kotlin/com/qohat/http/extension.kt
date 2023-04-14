@@ -7,7 +7,6 @@ import arrow.core.flatMap
 import arrow.core.identity
 import arrow.core.tail
 import arrow.core.toOption
-import arrow.core.traverse
 import arrow.fx.coroutines.parTraverseEither
 import com.qohat.config.FilesConfig
 import com.qohat.domain.AttachmentState

@@ -3,13 +3,10 @@ package com.qohat.repo
 import arrow.core.Either
 import com.qohat.domain.Name
 import com.qohat.domain.NewPaginationParams
-import com.qohat.domain.ProductShow
 import com.qohat.domain.Supply
 import com.qohat.domain.SupplyId
 import com.qohat.domain.SupplyShow
-import com.qohat.entities.Products
 import com.qohat.entities.Supplies
-import com.qohat.entities.toProductShow
 import com.qohat.entities.toSupplyShow
 import com.qohat.error.DomainError
 import org.jetbrains.exposed.sql.Database

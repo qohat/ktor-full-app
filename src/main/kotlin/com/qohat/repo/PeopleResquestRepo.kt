@@ -2,7 +2,6 @@ package com.qohat.repo
 
 import arrow.core.Either
 import arrow.core.traverse
-import arrow.fx.coroutines.parTraverseEither
 import com.qohat.domain.AttachmentId
 import com.qohat.domain.AttachmentIds
 import com.qohat.domain.AttachmentState

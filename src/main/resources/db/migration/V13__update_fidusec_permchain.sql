@@ -1,1 +1,0 @@
-update users set permission_chain = 'RdPC:RdAllNPaid:RdPaid:RdCompleted:RdRpts:ExptRpts:ImptRpts' where role_id = 4;

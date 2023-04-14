@@ -1,20 +1,10 @@
 package com.qohat.domain
 
-import java.util.Locale
-
 enum class AttachmentState(val value: String) {
     InReview("in-review"),
     Approved("approved"),
     Rejected("rejected"),
-    RequiresValidation("requires-validation"),
-    @Deprecated("Not use that state for files anymore")
-    NonPaid("28vnerueg9wr9bur4g9nu"),
-    @Deprecated("Not use that state for files anymore")
-    Completed("28vnerueg9wr9bur4g9nssu"),
-    @Deprecated("Not use that state for files anymore")
-    NonState("28vn334eg9wr9bur4g9nu"),
-    @Deprecated("Not use that state for files anymore")
-    Paid("28v4rrueg9wr9bur4g9nu");
+    RequiresValidation("requires-validation");
 
     companion object {
         fun unApply(arg: String): AttachmentState? =
@@ -47,13 +37,6 @@ value class Text(val value: String)
 
 @kotlinx.serialization.Serializable
 data class Pagination(val limit: Limit, val offset: Offset)
-
-
-fun String.capitalizeText(): String {
-    val capitalized = replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-    return if (capitalized.isNotEmpty()) capitalized[0] + capitalized.substring(1).lowercase()
-        else capitalized
-}
 
 
 
