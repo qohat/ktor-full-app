@@ -1,1 +1,0 @@
-ALTER TABLE bill_returns_validation_attachments_events ADD COLUMN state AttachmentState;

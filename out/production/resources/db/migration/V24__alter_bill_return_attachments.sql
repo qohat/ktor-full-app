@@ -1,1 +1,0 @@
-ALTER TABLE bill_returns_attachments ADD CONSTRAINT unique_bill_return_file UNIQUE (bill_return_id, file_id);

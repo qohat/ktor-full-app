@@ -26,6 +26,7 @@ hs_err_pid*
 .idea
 .gradle
 build
+out
 
 #files
 /uploads/
@@ -36,3 +37,4 @@ build
 /logs/
 /.idea/
 /.gradle/
+/out/
