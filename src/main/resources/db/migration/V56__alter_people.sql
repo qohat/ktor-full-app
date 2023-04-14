@@ -1,8 +1,3 @@
-DROP VIEW people_amount_drawn;
-DROP VIEW people_related_to_companies;
-DROP VIEW users_doing_process;
-DROP VIEW payments_approvals;
-DROP VIEW payment_commission_report;
 DROP VIEW specific_balance_view;
 ALTER TABLE people DROP CONSTRAINT people_email_key;
 ALTER TABLE people ALTER COLUMN address TYPE TEXT;

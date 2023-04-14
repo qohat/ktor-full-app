@@ -5,10 +5,8 @@ import arrow.core.continuations.ensureNotNull
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.qohat.domain.EncryptedPassword
 import com.qohat.domain.Password
-import com.qohat.domain.PermissionChain
 import com.qohat.domain.PermissionCode
 import com.qohat.domain.RecoverPasswordRequest
-import com.qohat.domain.RoleName
 import com.qohat.domain.User
 import com.qohat.domain.UserEmail
 import com.qohat.domain.UserId

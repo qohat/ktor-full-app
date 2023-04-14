@@ -6,6 +6,8 @@ import arrow.core.ValidatedNel
 import arrow.core.andThen
 import arrow.core.continuations.either
 import arrow.core.continuations.ensureNotNull
+import arrow.core.invalidNel
+import arrow.core.valid
 import arrow.core.validNel
 import arrow.core.zip
 import arrow.typeclasses.Semigroup
@@ -16,10 +18,13 @@ import com.qohat.domain.ListKey
 import com.qohat.domain.NewPaymentRecord
 import com.qohat.domain.NotPaidReason
 import com.qohat.domain.NotPaidReportRecord
+import com.qohat.domain.PaymentDate
 import com.qohat.domain.ProductId
 import com.qohat.domain.ValidBillReturnRecord
 import com.qohat.repo.ListRepo
 import com.qohat.repo.ViewsRepo
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 suspend fun ValidatedNel<String, Pair<String, String>>.validatePeopleRequest(viewsRepo: ViewsRepo) =
     andThen {
@@ -92,3 +97,13 @@ suspend fun validateNotPaidLineV2(viewsRepo: ViewsRepo, listRepo: ListRepo, list
         is Validated.Valid -> validation.value
     }
 }
+
+fun ValidatedNel<String, String>.validatePaymentDate(): ValidatedNel<String, PaymentDate> =
+    andThen {
+        try {
+            val date = LocalDate.parse(it, DateTimeFormatter.ISO_DATE)
+            PaymentDate(date).valid()
+        } catch (e: Exception) {
+            "Fecha: $it no es una fecha válida.".invalidNel()
+        }
+    }

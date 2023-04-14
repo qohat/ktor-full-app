@@ -145,16 +145,6 @@ enum class PermissionCode {   //ls.can('RdU')
     WtP, // Write People
     DltP, // Delete People
     UptP, // Update People
-    RdPC, // Read People Company
-    WtPC, // Write People Company
-    DltPC, // Delete People Company
-    UptPC, // Update People Company
-    RdVal, // Read Validations
-    WtVal, // Write Validations
-    RdNPaid, // Read Non Paid Validations
-    RdAllNPaid, // Read Non Paid Validations
-    RdPaid, // Read Non Paid Validations
-    RdCompleted, // Read Non Paid Validations
     RdRpts, // Read Non Paid Validations
     ExptRpts, // Read Non Paid Validations
     ImptRpts, // Read Non Paid Validations

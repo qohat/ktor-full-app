@@ -1,21 +1,12 @@
 package com.qohat.http
 
-import com.qohat.PostgresTestContainer
 import com.qohat.config.AppConfig
-import com.qohat.config.DBConfig
 import com.qohat.config.dependencies
 import com.qohat.data.token
-import com.qohat.domain.Password
-import com.qohat.domain.RecoverPasswordRequest
-import com.qohat.domain.RecoverToken
-import com.qohat.runPostgresContainer
-import com.qohat.withService
 import com.qohat.data.user
 import com.qohat.domain.User
 import com.qohat.domain.UserId
-import com.qohat.entities.Roles
-import com.qohat.entities.RunBatchSqlStatement
-import com.qohat.infra.Files
+import com.qohat.withService
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.ktor.client.call.body
@@ -28,7 +19,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
-import java.io.File
 import java.util.UUID
 
 class UserRouter: FunSpec({

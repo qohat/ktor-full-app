@@ -1,91 +1,11 @@
 package com.qohat.domain
 
 import arrow.core.Either
-import arrow.core.Option
 import com.qohat.codec.Codecs
 import kotlinx.serialization.Serializable
 import java.math.BigDecimal
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.UUID
-
-@Serializable
-data class PeopleId(val value: String)
-@Serializable
-data class PersonDocument(val value: String)
-@Serializable
-data class PersonName(val value: String)
-data class PersonEmail(val value: String)
-
-@Serializable
-data class AttachFileToPeopleCompany(val peopleCompanyId: PeopleCompanyId, val attachment: Attachment)
-
-@Serializable
-data class PeopleAttachment(
-    val id: String,
-    val peopleCompanyId: String,
-    val name: String,
-    val path: String,
-    val state: AttachmentState,
-    val active: Boolean,
-    val fileType: ValueList,
-    @Serializable(Codecs.LocalDateTimeSerializer::class)
-    val createdAt: LocalDateTime,
-    @Serializable(Codecs.LocalDateTimeSerializer::class)
-    val updatedAt: LocalDateTime
-)
-
-@Serializable
-data class People(
-    val id: PeopleId,
-    val name: String,
-    val lastName: String,
-    val documentType: ValueList, //Solo número de cédula
-    val document: String, //
-    @Serializable(Codecs.LocalDateSerializer::class)
-    val issueDocumentDate: LocalDate,
-    @Serializable(Codecs.LocalDateSerializer::class)
-    val birthday: LocalDate,
-    val gender: ValueList,
-    @Serializable(Codecs.OptionSerializer::class)
-    val address: Option<String>,
-    val locality: ValueList,
-    @Serializable(Codecs.OptionSerializer::class)
-    val neighborhood: Option<String>,
-    @Serializable(Codecs.OptionSerializer::class)
-    val phone: Option<String>,
-    @Serializable(Codecs.OptionSerializer::class)
-    val cellPhone: Option<String>,
-    val email: String,
-    val populationGroup: ValueList,
-    val ethnicGroup: ValueList,
-    val disability: ValueList,
-    val active: Boolean,
-    @Serializable(Codecs.LocalDateTimeSerializer::class)
-    val createdAt: LocalDateTime,
-    @Serializable(Codecs.LocalDateTimeSerializer::class)
-    val updatedAt: LocalDateTime,
-    val peopleCompanies: List<PeopleCompany>,
-    val createdBy: UserId
-)
-
-enum class Gender(val value: Int) {
-    Masculino(1),
-    Femenino(2);
-    companion object {
-        fun from(value: Int): Gender? = values().firstOrNull { it.value == value }
-    }
-}
-
-
-@Serializable
-data class ProductType(val id: ProductTypeId, val name: Name)
-
-@JvmInline
-@Serializable
-value class ProductTypeId(
-    val value: Int
-)
 
 @JvmInline
 @Serializable
@@ -214,5 +134,3 @@ data class NewPeople(
     val singleMother: SingleMother?,
     val createdBy: CreatedById?
 )
-
-//Dos decimales hectareas

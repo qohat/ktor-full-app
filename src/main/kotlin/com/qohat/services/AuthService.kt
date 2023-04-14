@@ -1,22 +1,21 @@
 package com.qohat.services
 
 import arrow.core.Either
-import arrow.core.None
-import arrow.core.Some
 import arrow.core.continuations.either
 import arrow.core.continuations.ensureNotNull
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.qohat.config.JWTConfig
-import com.qohat.domain.RoleName
 import com.qohat.domain.User
 import com.qohat.domain.UserAttempt
 import com.qohat.domain.UserEmail
 import com.qohat.domain.UserToken
-import com.qohat.error.*
+import com.qohat.error.DomainError
+import com.qohat.error.EmailError
+import com.qohat.error.PasswordError
 import com.qohat.repo.UserRepo
-import java.util.*
+import java.util.Date
 
 interface AuthService {
     suspend fun userAttempt(userAttempt: UserAttempt): Either<DomainError, User>
@@ -58,6 +57,6 @@ class DefaultAuthService(val jwtConfig: JWTConfig, val userRepo: UserRepo): Auth
     }
 
     override suspend fun logout() {
-        TODO("Not yet implemented")
+        TODO("Not implemented")
     }
 }

@@ -7,9 +7,7 @@ import arrow.core.toOption
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.qohat.domain.CcfId
 import com.qohat.domain.EncryptedPassword
-import com.qohat.domain.PermissionChain
 import com.qohat.domain.RecoverToken
-import com.qohat.domain.Role
 import com.qohat.domain.RoleName
 import com.qohat.domain.User
 import com.qohat.domain.UserEmail
